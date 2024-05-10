@@ -24,26 +24,26 @@ public class JWTServiceImpl implements JWTService {
 		return Jwts.builder().setSubject(userDetails.getUsername())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis()+ 1000 * 60 *24))// this number indicated the token will be valid for 1 day
-				.signWith(getSiginKey() ,SignatureAlgorithm.HS256)
+				.signWith(getSiginKey(), SignatureAlgorithm.HS256)
 				.compact();
 		
 	}
 	
-	public String generateRefreshToken(Map<String, Object> extractClaims,UserDetails userDetails){// built in method generateToken method is responsible to build the token for us
-		return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
+	public String generateRefreshToken(Map<String, Object> extraClaims,UserDetails userDetails){// built in method generateToken method is responsible to build the token for us
+		return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis()+ 604800000))//this number indicated the refreshed jwt token is valid for 7 days
-				.signWith(getSiginKey() ,SignatureAlgorithm.HS256)
+				.signWith(getSiginKey(), SignatureAlgorithm.HS256)
 				.compact();
 		
 	}
 	
 	// gonna create a method to get user name
 	public String extractUserName(String token) {
-		return extractClaim(token,Claims::getSubject);// this will return the email stored in the particular token
+		return extractClaim(token, Claims::getSubject);// this will return the email stored in the particular token
 	}
 	
-	private <T> T extractClaim(String token, Function<Claims, T>claimsResolvers) {
+	private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
 		final Claims claims = extractAllClaims(token);
 		return claimsResolvers.apply(claims);
 		
@@ -57,13 +57,12 @@ public class JWTServiceImpl implements JWTService {
 	}
 	
 	private Claims extractAllClaims (String token) {
-		return Jwts.parserBuilder().setSigningKey(getSiginKey()).build().parseClaimsJws(token)//<========================
-.getBody();// this method will return all the claims from our token		
+		return Jwts.parserBuilder().setSigningKey(getSiginKey()).build().parseClaimsJws(token).getBody();// this method will return all the claims from our token		
 	}
 	
-	public boolean isTokenValid(String token,UserDetails userDetails) {
-		final String username=extractUserName(token);
-		return (username.equals(userDetails.getUsername())&& !isTokenExpired(token));
+	public boolean isTokenValid(String token, UserDetails userDetails) {
+		final String username = extractUserName(token);
+		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	}
 	
 	private boolean isTokenExpired(String token) {

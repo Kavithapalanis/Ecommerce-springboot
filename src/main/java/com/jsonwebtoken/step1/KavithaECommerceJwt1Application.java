@@ -26,11 +26,11 @@ public class KavithaECommerceJwt1Application implements CommandLineRunner {
 	}
 	// now we need to create a method for ADMIN account
 	
-	public void run(String...args) {
+	public void run(String... args) {
 		// here is self we are going to write the logic for ADMIN user here itself
 		// before that in userRepository we need to create another method to find the user by their Role
 		
-		User adminAccount=userRepository.findByRole(Role.ADMIN);
+		User adminAccount = userRepository.findByRole(Role.ADMIN);
 		if(null == adminAccount) {
 			User user = new User();
 			

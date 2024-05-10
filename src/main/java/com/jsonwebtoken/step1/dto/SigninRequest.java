@@ -1,8 +1,8 @@
 package com.jsonwebtoken.step1.dto;
 
-import lombok.Data;
+//import lombok.Data;
 
-@Data
+//@Data
 
 public class SigninRequest {
 	

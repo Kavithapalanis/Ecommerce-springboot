@@ -19,7 +19,7 @@ import com.jsonwebtoken.step1.services.JWTService;
 
 import lombok.RequiredArgsConstructor;
 
-import lombok.RequiredArgsConstructor;
+//import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -50,7 +50,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		user.setFirstname(signUpRequest.getFirstname());
 		user.setLastname(signUpRequest.getLastname());
 		user.setRole(Role.USER);
-		user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+		user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));// here is our raw possword encoded in to hash password
 		
 		return userRepository.save(user);
 		

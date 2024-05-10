@@ -48,7 +48,7 @@ public class SecurityConfiguration {
 				.anyRequest().authenticated())
 		.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authenticationProvider(authenticationProvider())
-		.addFilterBefore(jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
+		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 	/*public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -74,7 +74,7 @@ return http.build();
 		
 		@Bean
 		public AuthenticationProvider authenticationProvider() {
-			DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+			DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 			authenticationProvider.setUserDetailsService(userService.userDetailsService());
 			authenticationProvider.setPasswordEncoder(passwordEncoder());
 			return authenticationProvider;

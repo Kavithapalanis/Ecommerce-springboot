@@ -13,9 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+//import lombok.Data;
 
-@Data
+//@Data
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -38,7 +38,7 @@ public class User implements UserDetails {
 	
 	private Role role;
 	
-		public String getFirstname() {
+	public String getFirstname() {
 		return firstname;
 	}
 
@@ -69,7 +69,11 @@ public class User implements UserDetails {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	public String getPassword() {
+		return password;
+	} 
 
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -79,41 +83,42 @@ public class User implements UserDetails {
 		
 	}
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	} 
+	
+	
+	//public String getPassword() {
+		
+		//return password;
+	//} 
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
+		
 		return email;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
+		
 		return true;
-	}
+	} 
 
 		
 
